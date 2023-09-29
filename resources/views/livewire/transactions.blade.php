@@ -21,8 +21,8 @@ new class extends Component {
 
     protected $rules = [
         'quantity' => 'required |integer',
-        'warehouseUUID' => 'required |exists:warehouses,uuid',
-        'commodityUUID' => 'required |exists:goods,uuid',
+        'warehouseUUID' => 'required',
+        'commodityUUID' => 'required',
     ];
 
     public function with(): array
@@ -152,7 +152,7 @@ new class extends Component {
                                         <tr>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ $transaction->id }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ optional($transaction->warehouse)->name }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ optional($transaction->goods)->name }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ optional($transaction->commodity)->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ $transaction->quantity }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ $transaction->created_at }}</td>
                                         </tr>

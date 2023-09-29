@@ -9,7 +9,7 @@ class DeleteWarehouse extends Action
 {
     public function run($uuid)
     {
-        WarehouseAggregateRoot::retrieve(Str::uuid())
+        WarehouseAggregateRoot::retrieve($uuid)
             ->deleteWarehouse($uuid)
             ->persist();
     }

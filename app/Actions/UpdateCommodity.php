@@ -2,15 +2,14 @@
 
 namespace App\Actions;
 
-use App\Aggregates\GoodsAggregateRoot;
+use App\Aggregates\WarehouseAggregateRoot;
+use App\Models\Goods;
 use Illuminate\Support\Str;
 
 class UpdateCommodity extends Action
 {
     public function run($uuid,$name)
     {
-        GoodsAggregateRoot::retrieve(Str::uuid())
-            ->updateGoods($uuid,$name)
-            ->persist();
+        Goods::query()->where('uuid',$uuid)->firstOrFail()->update(['name' => $name]);
     }
 }

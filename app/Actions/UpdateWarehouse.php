@@ -9,7 +9,7 @@ class UpdateWarehouse extends Action
 {
     public function run(string $uuid, string $name)
     {
-        WarehouseAggregateRoot::retrieve(Str::uuid())
+        WarehouseAggregateRoot::retrieve('fake-uuid')
             ->updateWarehouse($uuid, $name)
             ->persist();
     }

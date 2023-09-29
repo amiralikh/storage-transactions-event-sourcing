@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EventSourcing\Projections\Projection;
 
-class Goods extends Projection
+class Goods extends Model
 {
     use HasFactory;
     protected $fillable=['uuid','name'];

@@ -2,10 +2,9 @@
 
 namespace App\Projectors;
 
-use App\Events\AddedTransactionToWarehouse;
-use App\Events\RemovedItemFromWarehouse;
 use App\Models\WarehouseGoods;
-use Illuminate\Support\Facades\DB;
+use App\StorableEvents\AddedTransactionToWarehouse;
+use App\StorableEvents\RemovedItemFromWarehouse;
 use Illuminate\Support\Str;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
@@ -17,16 +16,15 @@ class TransactionProjector extends Projector
             'warehouse_uuid' => $event->warehouseUUID,
             'commodity_uuid' => $event->commodityUUID,
         ])->first();
-
-        if ($item){
+        if ($item) {
             $item->quantity += $event->quantity;
             $item->writeable()->save();
         } else {
-            WarehouseGoods::query()->writeable()->create(
+            (new WarehouseGoods)->writeable()->create(
                 [
                     'warehouse_uuid' => $event->warehouseUUID,
                     'commodity_uuid' => $event->commodityUUID,
-                    'quantity' => DB::raw('quantity + ' . $event->quantity),
+                    'quantity' => $event->quantity,
                     'uuid' => Str::uuid()
                 ]
             );
