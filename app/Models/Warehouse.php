@@ -17,4 +17,5 @@ class Warehouse extends Projection
             ->using(WarehouseGoods::class)
             ->withPivot('quantity');
     }
+
 }

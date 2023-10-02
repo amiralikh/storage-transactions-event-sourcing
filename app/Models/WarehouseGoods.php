@@ -20,4 +20,6 @@ class WarehouseGoods extends Projection
     {
         return $this->belongsTo(Goods::class, 'commodity_uuid');
     }
+
+
 }

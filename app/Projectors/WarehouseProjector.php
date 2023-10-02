@@ -3,6 +3,7 @@
 namespace App\Projectors;
 
 use App\Models\Warehouse;
+use App\Models\WarehouseGoods;
 use App\StorableEvents\WarehouseCreated;
 use App\StorableEvents\WarehouseDeleted;
 use App\StorableEvents\WarehouseUpdated;
@@ -39,5 +40,10 @@ class WarehouseProjector extends Projector
         $warehouse = Warehouse::query()->where('uuid',$uuid)->firstOrFail();
         throw_if(!$warehouse, 'this warehouse does not exists!');
         return $warehouse;
+    }
+
+    public function resetState(): void
+    {
+        Warehouse::query()->delete();
     }
 }

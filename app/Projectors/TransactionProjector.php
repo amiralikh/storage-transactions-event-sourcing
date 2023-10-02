@@ -2,6 +2,7 @@
 
 namespace App\Projectors;
 
+use App\Models\Warehouse;
 use App\Models\WarehouseGoods;
 use App\StorableEvents\AddedTransactionToWarehouse;
 use App\StorableEvents\RemovedItemFromWarehouse;
@@ -42,5 +43,10 @@ class TransactionProjector extends Projector
             ])
             ->where('quantity', '>=', $event->quantity)
             ->decrement('quantity', $event->quantity);
+    }
+
+    public function resetState(): void
+    {
+        WarehouseGoods::query()->delete();
     }
 }
